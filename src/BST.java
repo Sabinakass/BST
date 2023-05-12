@@ -8,6 +8,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BST.KVEntry>{
         private K key;
         private V value;
 
+        private int size = 1;
 
         private Node left, right;
 
@@ -21,7 +22,8 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BST.KVEntry>{
             return '(' +
                     "key=" + key +
                     ", value=" + value +
-                    ')';
+                    ", size=" + size +
+                    '}';
         }
     }
 
@@ -43,9 +45,17 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BST.KVEntry>{
         else{
             node.value=value;
         }
+        node.size = 1 + size(node.left) + size(node.right);
         return node;
     }
 
+    private int size(Node node) {
+        if (node == null) {
+            return 0;
+        }
+
+        return node.size;
+    }
 
 
     public V get(K key) {
@@ -81,9 +91,11 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BST.KVEntry>{
         int cmp = key.compareTo(node.key);
         if(cmp<0){
             node.left=deleteHidden(node.left, key);
+            node.size--;
         }
         else if(cmp>0){
             node.right=deleteHidden(node.right, key);
+            node.size--;
         }
         else{
             if(node.left==null){
@@ -97,6 +109,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BST.KVEntry>{
                 node.key = minNode.key;
                 node.value = minNode.value;
                 node.right = deleteMin(node.right);
+                node.size--;
             }
         }
         return node;
