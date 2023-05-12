@@ -12,5 +12,5 @@ iterator(): returns an iterator that iterates over the key-value pairs in the tr
 The iterator is implemented using an in-order traversal of the tree, which visits the nodes in ascending order of the keys.
 
 The KVEntry inner class represents a key-value pair, and is used to return key-value pairs from the iterator.
-## created by Kassymova Sabina
+## Created by Kassymova Sabina
 ## Talgar is the best town!
